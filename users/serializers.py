@@ -7,10 +7,12 @@ from django.contrib.auth import authenticate
 class SignUpSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
     confirm_pass = serializers.CharField(write_only=True)
+    email = serializers.EmailField(required=False)
+    phone = serializers.CharField(required=False)
 
     class Meta:
         model = CustomUser
-        fields = ['username', 'first_name', 'password', 'confirm_pass']
+        fields = ['username', 'first_name','email','phone', 'password', 'confirm_pass']
 
 
     def validate(self, attrs):
@@ -38,7 +40,7 @@ class SignUpSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         validated_data.pop('confirm_pass')
         user = CustomUser.objects.create_user(**validated_data)
-
+#parolni heshlab saqlab qoyishga
         return user
 
 class LoginSerializer(serializers.Serializer):
@@ -50,6 +52,7 @@ class LoginSerializer(serializers.Serializer):
             username=attrs['username'],
             password=attrs['password']
         )
+#Basadagi malumot bilan mos kevotimi tekshiradi
 
         if not user:
             raise ValidationError("Username yoki parol xato")
@@ -85,7 +88,7 @@ class ChangePasswordSerializer(serializers.Serializer):
 
     def save(self):
         user = self.context['request'].user
-        user.set_password(self.validated_data['new_password'])
+        user.set_password(self.validated_data['new_password']) #heshlashga
         user.save()
         return user
 

@@ -51,8 +51,6 @@ class OrderCreateAPIView(APIView):
 
         for item in items:
             product = item.product
-
-            # stock update
             product.quantity -= item.quantity
             product.save(update_fields=["quantity"])
 

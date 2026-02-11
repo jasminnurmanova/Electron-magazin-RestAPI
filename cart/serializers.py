@@ -4,6 +4,7 @@ from rest_framework.exceptions import ValidationError
 from django.contrib.auth.password_validation import validate_password
 from products.serializers import ProductDetailSerializer
 from .models import Cart,CartItem
+
 class CartItemSerializer(serializers.ModelSerializer):
     product=ProductDetailSerializer(read_only=True)
 

@@ -13,7 +13,7 @@ class ProductCreateSerializer(serializers.ModelSerializer):
         fields = ['title','category', "quantity","description", 'price']
 
         def create(self, validated_data):
-            category_name = validated_data.pop('category')
+            category_name = validated_data.pop('category') #category alohida create bovoti
 
             category, _ = Category.objects.get_or_create(
                 name=category_name
@@ -54,10 +54,12 @@ class ProductUpdateSerializer(serializers.ModelSerializer):
         fields = ["title","category","description","price","quantity"]
 
     def update(self, instance, validated_data):
-        if category := validated_data.pop("category", None):
+        if category := validated_data.pop("category", None): #walrus operator soxranit qilib srazu ifda tekshiradi
             instance.category, _ = Category.objects.get_or_create(name=category)
+            #Django ORM, birinchi bazadan qidiradi name=category obyetni qaytaradi or yangi yaratadi
         for k, v in validated_data.items():
             setattr(instance, k, v)
+            #dinamik ozgartiradi
 
         instance.save()
         return instance

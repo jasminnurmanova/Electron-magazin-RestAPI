@@ -170,7 +170,7 @@ class CommentDetailAPIView(APIView):
 
     def delete(self, request, pk):
         comment = self.get_object(request, pk)
-        if isinstance(comment, Response):
+        if isinstance(comment, Response): #xato bosa srazu chiqaradi, yoki http response bosa uni korsatadi
             return comment
 
         comment.delete()
@@ -178,6 +178,7 @@ class CommentDetailAPIView(APIView):
             {"detail": "Comment o‘chirildi"},
             status=status.HTTP_204_NO_CONTENT
         )
+
 
 #admin uchun hamma kommentlar yoki user faqat oziniki ucun
 

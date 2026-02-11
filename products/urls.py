@@ -12,7 +12,7 @@ urlpatterns = [
     path("delete-update/<int:pk>/", ProductUpdateDeleteView.as_view()),#tick
     path("cr-comment/<int:pk>/", ProductCommentsAPIView.as_view()),#tick
     path("ud-comment/<int:pk>/", CommentDetailAPIView.as_view()), #tick
-    path("search/", ProductSearchAPIView.as_view()), #?
+    path("search/", ProductSearchAPIView.as_view()), #tick
     path("comment-list/", CommentsListAPIView.as_view()), #tick
 
 ]

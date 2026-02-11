@@ -62,6 +62,7 @@ class LogoutView(APIView):
         }
         return Response(data)
 
+
 class ProfileView(APIView):
     permission_classes=[permissions.IsAuthenticated]
 
